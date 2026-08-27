@@ -1,0 +1,39 @@
+{
+    "name": "imscp/roundcube-plugin-installer",
+    "description": "i-MSCP composer installer for Roundcube plugins (Composer 2 compatible)",
+    "type": "composer-plugin",
+    "license": "GPL-3.0+",
+    "version": "1.1.0",
+    "authors": [
+        {
+            "name": "Thomas Bruederli",
+            "email": "thomas@roundcube.net"
+        },
+        {
+            "name": "Till Klampaeckel",
+            "email": "till@php.net"
+        },
+        {
+            "name": "Laurent Declercq",
+            "email": "l.declercq@nuxwin.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Roundcube\\Composer": "src/"
+        }
+    },
+    "extra": {
+        "class": "Roundcube\\Composer\\Plugin"
+    },
+    "bin": [
+        "src/bin/rcubeinitdb.sh"
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "composer-plugin-api": "^1.0 || ^2.0"
+    },
+    "replace": {
+        "roundcube/plugin-installer": "0.1.*"
+    }
+}

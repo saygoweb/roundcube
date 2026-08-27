@@ -112,16 +112,34 @@ EOT
                 'classmap-authoritative' => JSON::false,
                 'preferred-install'      => 'dist',
                 'process-timeout'        => 5000,
-                'use-include-path'       => JSON::false
+                'use-include-path'       => JSON::false,
+                # Composer 2.2+ refuses to run plugins that are not explicitly
+                # allowed, and skips them silently under --no-interaction.
+                'allow-plugins'          => {
+                    'imscp/roundcube-plugin-installer' => JSON::true
+                }
             },
             'dev',
             JSON::true
         );
 
         # We want make use of our own composer plugin for Roundcube plugins
-        # installation
+        # installation.
+        #
+        # Packagist only ever published Composer 1 builds of
+        # imscp/roundcube-plugin-installer (1.0.x, composer-plugin-api ^1.0),
+        # so it is resolved from the Composer 2 compatible copy shipped
+        # alongside this package instead.
+        push @{ $composer->getComposerJson( TRUE )->{'repositories'} }, {
+            type    => 'path',
+            url     => '../plugin-installer',
+            options => {
+                symlink => JSON::false
+            }
+        };
+
         $composer->remove( 'roundcube/plugin-installer' );
-        $composer->require( 'imscp/roundcube-plugin-installer', '^1.0' );
+        $composer->require( 'imscp/roundcube-plugin-installer', '^1.1' );
 
         # Install Roundcube PHP dependencies 
         $composer->update( TRUE );

@@ -54,12 +54,6 @@
       ]
     },
     {
-      "lib": "tinymce-langs",
-      "version": "4.5.8",
-      "url": "https://www.tiny.cloud/docs-4x/language/tinymce4x_languages.zip",
-      "dest": "program/js/tinymce"
-    },
-    {
       "lib": "openpgp",
       "name": "OpenPGP.js",
       "version": "2.6.2",
